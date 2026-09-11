@@ -56,12 +56,13 @@ def send_to_dlq(order, reason):
     dlq_producer.flush()
     print(f"  💀 Sent to DLQ | reason: {reason}")
 
-# ── Simulated Processing (10% random failure) ─────────────────────
+# ── Simulated Processing (40% random failure for demo) ────────────
 def process_order(order):
-    if random.random() < 0.1:
+    if random.random() < 0.4:
         raise ValueError("Transient processing error (simulated)")
     # Real processing logic would go here
     return True
+
 
 # ── Consumer Setup ────────────────────────────────────────────────
 consumer = Consumer({
